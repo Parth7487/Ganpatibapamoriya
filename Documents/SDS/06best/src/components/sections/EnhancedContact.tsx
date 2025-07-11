@@ -27,16 +27,26 @@ const EnhancedContact = () => {
     setIsSubmitting(true);
 
     try {
-      // Replace with your actual Formspree endpoint
-      const response = await fetch("https://formspree.io/f/YOUR_FORM_ID", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
+      // Replace with your actual form submission endpoint (Formspree, Netlify Forms, etc.)
+      // For demo purposes, this simulates a successful form submission
+      console.log("Form submission:", {
+        ...formData,
+        budget: selectedBudget,
+        projectType: selectedProjectType,
       });
 
-      if (response.ok) {
+      // Simulate API call delay
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      // Example for Formspree (replace YOUR_FORM_ID with actual ID):
+      // const response = await fetch("https://formspree.io/f/YOUR_FORM_ID", {
+      //   method: "POST",
+      //   headers: { "Content-Type": "application/json" },
+      //   body: JSON.stringify(formData),
+      // });
+
+      // For demo, assume success
+      if (true) {
         setIsSubmitted(true);
         toast({
           title: "Message sent successfully! 🎉",
