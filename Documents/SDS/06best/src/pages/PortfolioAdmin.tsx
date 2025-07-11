@@ -1,95 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowLeft, Settings, Shield, Eye } from "lucide-react";
+import { ArrowLeft, Settings, Eye } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import PortfolioCMS from "../components/sections/PortfolioCMS";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
 const PortfolioAdmin = () => {
   const navigate = useNavigate();
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [password, setPassword] = useState("");
   const [showStats, setShowStats] = useState(true);
-
-  // Simple password protection (in production, use proper authentication)
-  const handleLogin = () => {
-    if (password === "admin123") {
-      setIsAuthenticated(true);
-      localStorage.setItem("portfolio_admin_auth", "true");
-    } else {
-      alert("Incorrect password");
-    }
-  };
-
-  useEffect(() => {
-    const auth = localStorage.getItem("portfolio_admin_auth");
-    if (auth === "true") {
-      setIsAuthenticated(true);
-    }
-  }, []);
-
-  const handleLogout = () => {
-    setIsAuthenticated(false);
-    localStorage.removeItem("portfolio_admin_auth");
-    setPassword("");
-  };
-
-  // Login screen
-  if (!isAuthenticated) {
-    return (
-      <div className="min-h-screen bg-charcoal flex items-center justify-center p-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="max-w-md w-full"
-        >
-          <Card className="elegant-card">
-            <CardHeader className="text-center">
-              <div className="w-16 h-16 bg-beige/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Shield className="w-8 h-8 text-beige" />
-              </div>
-              <CardTitle className="text-2xl text-beige">
-                Portfolio Admin
-              </CardTitle>
-              <p className="text-gray-400">Enter password to access the CMS</p>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
-                  Password
-                </label>
-                <input
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  onKeyPress={(e) => e.key === "Enter" && handleLogin()}
-                  className="w-full bg-graphite border border-beige/20 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-beige/50"
-                  placeholder="Enter admin password"
-                  autoFocus
-                />
-              </div>
-              <Button onClick={handleLogin} className="w-full elegant-button">
-                Login to CMS
-              </Button>
-              <div className="text-center">
-                <Button
-                  onClick={() => navigate("/")}
-                  variant="ghost"
-                  size="sm"
-                  className="text-gray-400 hover:text-beige"
-                >
-                  <ArrowLeft className="w-4 h-4 mr-2" />
-                  Back to Site
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        </motion.div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-charcoal">
@@ -138,15 +58,6 @@ const PortfolioAdmin = () => {
               >
                 <Eye className="w-4 h-4 mr-2" />
                 Preview Site
-              </Button>
-
-              <Button
-                onClick={handleLogout}
-                variant="ghost"
-                size="sm"
-                className="text-red-400 hover:text-red-300"
-              >
-                Logout
               </Button>
             </div>
           </div>
